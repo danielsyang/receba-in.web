@@ -5,6 +5,8 @@ import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Typography from "@material-ui/core/Typography"
 import Link from "@material-ui/core/Link"
+import { useLogin } from "./useLogin"
+import { useForm, Controller } from "react-hook-form"
 
 const useStyles = makeStyles({
   container: {
@@ -29,22 +31,56 @@ const useStyles = makeStyles({
 
 export const LoginForm = () => {
   const { container, passwordStyle, loginStyle, formController } = useStyles()
+  const { control, handleSubmit, errors } = useLogin()
+
   return (
-    <div className={container}>
-      <TextField label="E-mail" />
-      <TextField label="Senha" className={passwordStyle} />
+    <form className={container} onSubmit={handleSubmit}>
+      <Controller
+        as={
+          <TextField
+            label="E-mail"
+            helperText={errors.login?.message || undefined}
+            error={!!errors.login?.message}
+          />
+        }
+        name="login"
+        control={control}
+        defaultValue=""
+      />
+
+      <Controller
+        as={<TextField label="Senha" className={passwordStyle} />}
+        name="password"
+        control={control}
+        defaultValue=""
+      />
+
       <div className={formController}>
-        <FormControlLabel
-          control={<Checkbox color="primary" />}
-          label="Lembrar de mim"
+        <Controller
+          as={
+            <FormControlLabel
+              control={<Checkbox color="primary" />}
+              label="Lembrar de mim"
+            />
+          }
+          name="remindMe"
+          control={control}
+          defaultValue={false}
         />
+
         <Typography>
           <Link href="#">Esqueceu a senha?</Link>
         </Typography>
       </div>
-      <Button variant="outlined" color="primary" className={loginStyle}>
+
+      <Button
+        type="submit"
+        variant="outlined"
+        color="primary"
+        className={loginStyle}
+      >
         Login
       </Button>
-    </div>
+    </form>
   )
 }
