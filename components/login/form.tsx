@@ -38,6 +38,7 @@ export const LoginForm = () => {
       <Controller
         as={
           <TextField
+            required={true}
             label="E-mail"
             helperText={errors.login?.message || undefined}
             error={!!errors.login?.message}
@@ -49,7 +50,16 @@ export const LoginForm = () => {
       />
 
       <Controller
-        as={<TextField label="Senha" className={passwordStyle} />}
+        as={
+          <TextField
+            required={true}
+            type="password"
+            label="Senha"
+            className={passwordStyle}
+            helperText={errors.password?.message || undefined}
+            error={!!errors.password?.message}
+          />
+        }
         name="password"
         control={control}
         defaultValue=""
