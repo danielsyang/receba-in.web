@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles"
-
 import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons"
+
 import { LoginForm } from "./form"
 
 const useStyles = makeStyles({

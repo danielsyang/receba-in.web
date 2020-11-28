@@ -6,7 +6,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Typography from "@material-ui/core/Typography"
 import Link from "@material-ui/core/Link"
 import { useLogin } from "./useLogin"
-import { useForm, Controller } from "react-hook-form"
+import { Controller } from "react-hook-form"
 
 const useStyles = makeStyles({
   container: {
